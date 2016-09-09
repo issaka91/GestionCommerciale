@@ -9,6 +9,8 @@ use Cake\Validation\Validator;
 /**
  * Commandes Model
  *
+ * @property \Cake\ORM\Association\BelongsTo $Fournisseurs
+ *
  * @method \App\Model\Entity\Commande get($primaryKey, $options = [])
  * @method \App\Model\Entity\Commande newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\Commande[] newEntities(array $data, array $options = [])
@@ -31,8 +33,13 @@ class CommandesTable extends Table
         parent::initialize($config);
 
         $this->table('commandes');
-        $this->displayField('NumCmd');
-        $this->primaryKey('NumCmd');
+        $this->displayField('id');
+        $this->primaryKey('id');
+
+        $this->belongsTo('Fournisseurs', [
+            'foreignKey' => 'fournisseur_id',
+            'joinType' => 'INNER'
+        ]);
     }
 
     /**
@@ -44,12 +51,7 @@ class CommandesTable extends Table
     public function validationDefault(Validator $validator)
     {
         $validator
-            ->allowEmpty('NumCmd', 'create');
-
-        $validator
-            ->integer('NumFss')
-            ->requirePresence('NumFss', 'create')
-            ->notEmpty('NumFss');
+            ->allowEmpty('id', 'create');
 
         $validator
             ->date('DateCmd')
@@ -65,5 +67,19 @@ class CommandesTable extends Table
             ->notEmpty('etatCmd');
 
         return $validator;
+    }
+
+    /**
+     * Returns a rules checker object that will be used for validating
+     * application integrity.
+     *
+     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
+     * @return \Cake\ORM\RulesChecker
+     */
+    public function buildRules(RulesChecker $rules)
+    {
+        $rules->add($rules->existsIn(['fournisseur_id'], 'Fournisseurs'));
+
+        return $rules;
     }
 }

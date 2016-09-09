@@ -34,7 +34,7 @@ class MarquesController extends AppController
     public function view($id = null)
     {
         $marque = $this->Marques->get($id, [
-            'contain' => []
+            'contain' => ['Produits']
         ]);
 
         $this->set('marque', $marque);

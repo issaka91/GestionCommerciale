@@ -6,11 +6,13 @@ use Cake\ORM\Entity;
 /**
  * Produit Entity
  *
- * @property int $NumProd
- * @property int $NumMarque
+ * @property int $id
+ * @property int $marque_id
  * @property string $Designation
  * @property float $PrixUnitaire
  * @property string $QteStock
+ *
+ * @property \App\Model\Entity\Marque $marque
  */
 class Produit extends Entity
 {
@@ -26,6 +28,6 @@ class Produit extends Entity
      */
     protected $_accessible = [
         '*' => true,
-        'NumProd' => false
+        'id' => false
     ];
 }

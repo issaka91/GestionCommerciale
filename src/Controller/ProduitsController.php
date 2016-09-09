@@ -18,6 +18,9 @@ class ProduitsController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Marques']
+        ];
         $produits = $this->paginate($this->Produits);
 
         $this->set(compact('produits'));
@@ -34,7 +37,7 @@ class ProduitsController extends AppController
     public function view($id = null)
     {
         $produit = $this->Produits->get($id, [
-            'contain' => []
+            'contain' => ['Marques']
         ]);
 
         $this->set('produit', $produit);
@@ -59,7 +62,8 @@ class ProduitsController extends AppController
                 $this->Flash->error(__('The produit could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('produit'));
+        $marques = $this->Produits->Marques->find('list', ['limit' => 200]);
+        $this->set(compact('produit', 'marques'));
         $this->set('_serialize', ['produit']);
     }
 
@@ -85,7 +89,8 @@ class ProduitsController extends AppController
                 $this->Flash->error(__('The produit could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('produit'));
+        $marques = $this->Produits->Marques->find('list', ['limit' => 200]);
+        $this->set(compact('produit', 'marques'));
         $this->set('_serialize', ['produit']);
     }
 

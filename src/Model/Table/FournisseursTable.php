@@ -9,6 +9,8 @@ use Cake\Validation\Validator;
 /**
  * Fournisseurs Model
  *
+ * @property \Cake\ORM\Association\HasMany $Commandes
+ *
  * @method \App\Model\Entity\Fournisseur get($primaryKey, $options = [])
  * @method \App\Model\Entity\Fournisseur newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\Fournisseur[] newEntities(array $data, array $options = [])
@@ -31,8 +33,12 @@ class FournisseursTable extends Table
         parent::initialize($config);
 
         $this->table('fournisseurs');
-        $this->displayField('NumFss');
-        $this->primaryKey('NumFss');
+        $this->displayField('id');
+        $this->primaryKey('id');
+
+        $this->hasMany('Commandes', [
+            'foreignKey' => 'fournisseur_id'
+        ]);
     }
 
     /**
@@ -44,8 +50,8 @@ class FournisseursTable extends Table
     public function validationDefault(Validator $validator)
     {
         $validator
-            ->integer('NumFss')
-            ->allowEmpty('NumFss', 'create');
+            ->integer('id')
+            ->allowEmpty('id', 'create');
 
         $validator
             ->allowEmpty('Nif');

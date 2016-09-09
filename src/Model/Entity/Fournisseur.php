@@ -6,13 +6,15 @@ use Cake\ORM\Entity;
 /**
  * Fournisseur Entity
  *
- * @property int $NumFss
+ * @property int $id
  * @property string $Nif
  * @property string $nomFss
  * @property string $AdresseFss
  * @property string $TelFss
  * @property string $VilleFss
  * @property string $PaysFss
+ *
+ * @property \App\Model\Entity\Commande[] $commandes
  */
 class Fournisseur extends Entity
 {
@@ -28,6 +30,6 @@ class Fournisseur extends Entity
      */
     protected $_accessible = [
         '*' => true,
-        'NumFss' => false
+        'id' => false
     ];
 }

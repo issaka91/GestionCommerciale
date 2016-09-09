@@ -24,7 +24,8 @@ class FournisseursTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.fournisseurs'
+        'app.fournisseurs',
+        'app.commandes'
     ];
 
     /**

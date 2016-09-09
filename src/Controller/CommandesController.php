@@ -18,6 +18,9 @@ class CommandesController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Fournisseurs']
+        ];
         $commandes = $this->paginate($this->Commandes);
 
         $this->set(compact('commandes'));
@@ -34,7 +37,7 @@ class CommandesController extends AppController
     public function view($id = null)
     {
         $commande = $this->Commandes->get($id, [
-            'contain' => []
+            'contain' => ['Fournisseurs']
         ]);
 
         $this->set('commande', $commande);
@@ -59,7 +62,8 @@ class CommandesController extends AppController
                 $this->Flash->error(__('The commande could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('commande'));
+        $fournisseurs = $this->Commandes->Fournisseurs->find('list', ['limit' => 200]);
+        $this->set(compact('commande', 'fournisseurs'));
         $this->set('_serialize', ['commande']);
     }
 
@@ -85,7 +89,8 @@ class CommandesController extends AppController
                 $this->Flash->error(__('The commande could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('commande'));
+        $fournisseurs = $this->Commandes->Fournisseurs->find('list', ['limit' => 200]);
+        $this->set(compact('commande', 'fournisseurs'));
         $this->set('_serialize', ['commande']);
     }
 

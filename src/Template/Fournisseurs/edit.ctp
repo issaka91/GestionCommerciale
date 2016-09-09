@@ -3,11 +3,13 @@
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Form->postLink(
                 __('Delete'),
-                ['action' => 'delete', $fournisseur->NumFss],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $fournisseur->NumFss)]
+                ['action' => 'delete', $fournisseur->id],
+                ['confirm' => __('Are you sure you want to delete # {0}?', $fournisseur->id)]
             )
         ?></li>
         <li><?= $this->Html->link(__('List Fournisseurs'), ['action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('List Commandes'), ['controller' => 'Commandes', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Commande'), ['controller' => 'Commandes', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="fournisseurs form large-9 medium-8 columns content">

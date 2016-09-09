@@ -16,7 +16,8 @@ class FournisseursControllerTest extends IntegrationTestCase
      * @var array
      */
     public $fixtures = [
-        'app.fournisseurs'
+        'app.fournisseurs',
+        'app.commandes'
     ];
 
     /**

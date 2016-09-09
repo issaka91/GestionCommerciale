@@ -9,6 +9,8 @@ use Cake\Validation\Validator;
 /**
  * Marques Model
  *
+ * @property \Cake\ORM\Association\HasMany $Produits
+ *
  * @method \App\Model\Entity\Marque get($primaryKey, $options = [])
  * @method \App\Model\Entity\Marque newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\Marque[] newEntities(array $data, array $options = [])
@@ -31,8 +33,12 @@ class MarquesTable extends Table
         parent::initialize($config);
 
         $this->table('marques');
-        $this->displayField('NumMarque');
-        $this->primaryKey('NumMarque');
+        $this->displayField('id');
+        $this->primaryKey('id');
+
+        $this->hasMany('Produits', [
+            'foreignKey' => 'marque_id'
+        ]);
     }
 
     /**
@@ -44,8 +50,8 @@ class MarquesTable extends Table
     public function validationDefault(Validator $validator)
     {
         $validator
-            ->integer('NumMarque')
-            ->allowEmpty('NumMarque', 'create');
+            ->integer('id')
+            ->allowEmpty('id', 'create');
 
         $validator
             ->allowEmpty('LibMarque');

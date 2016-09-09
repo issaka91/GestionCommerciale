@@ -17,10 +17,10 @@ class MarquesFixture extends TestFixture
      */
     // @codingStandardsIgnoreStart
     public $fields = [
-        'NumMarque' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
+        'id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
         'LibMarque' => ['type' => 'string', 'length' => 254, 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         '_constraints' => [
-            'primary' => ['type' => 'primary', 'columns' => ['NumMarque'], 'length' => []],
+            'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
         ],
         '_options' => [
             'engine' => 'InnoDB',
@@ -36,7 +36,7 @@ class MarquesFixture extends TestFixture
      */
     public $records = [
         [
-            'NumMarque' => 1,
+            'id' => 1,
             'LibMarque' => 'Lorem ipsum dolor sit amet'
         ],
     ];

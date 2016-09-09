@@ -6,8 +6,10 @@ use Cake\ORM\Entity;
 /**
  * Marque Entity
  *
- * @property int $NumMarque
+ * @property int $id
  * @property string $LibMarque
+ *
+ * @property \App\Model\Entity\Produit[] $produits
  */
 class Marque extends Entity
 {
@@ -23,6 +25,6 @@ class Marque extends Entity
      */
     protected $_accessible = [
         '*' => true,
-        'NumMarque' => false
+        'id' => false
     ];
 }

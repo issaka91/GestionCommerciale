@@ -34,7 +34,7 @@ class FournisseursController extends AppController
     public function view($id = null)
     {
         $fournisseur = $this->Fournisseurs->get($id, [
-            'contain' => []
+            'contain' => ['Commandes']
         ]);
 
         $this->set('fournisseur', $fournisseur);

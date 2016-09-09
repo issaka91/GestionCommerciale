@@ -9,6 +9,8 @@ use Cake\Validation\Validator;
 /**
  * Produits Model
  *
+ * @property \Cake\ORM\Association\BelongsTo $Marques
+ *
  * @method \App\Model\Entity\Produit get($primaryKey, $options = [])
  * @method \App\Model\Entity\Produit newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\Produit[] newEntities(array $data, array $options = [])
@@ -31,8 +33,13 @@ class ProduitsTable extends Table
         parent::initialize($config);
 
         $this->table('produits');
-        $this->displayField('NumProd');
-        $this->primaryKey('NumProd');
+        $this->displayField('id');
+        $this->primaryKey('id');
+
+        $this->belongsTo('Marques', [
+            'foreignKey' => 'marque_id',
+            'joinType' => 'INNER'
+        ]);
     }
 
     /**
@@ -44,13 +51,8 @@ class ProduitsTable extends Table
     public function validationDefault(Validator $validator)
     {
         $validator
-            ->integer('NumProd')
-            ->allowEmpty('NumProd', 'create');
-
-        $validator
-            ->integer('NumMarque')
-            ->requirePresence('NumMarque', 'create')
-            ->notEmpty('NumMarque');
+            ->integer('id')
+            ->allowEmpty('id', 'create');
 
         $validator
             ->allowEmpty('Designation');
@@ -63,5 +65,19 @@ class ProduitsTable extends Table
             ->allowEmpty('QteStock');
 
         return $validator;
+    }
+
+    /**
+     * Returns a rules checker object that will be used for validating
+     * application integrity.
+     *
+     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
+     * @return \Cake\ORM\RulesChecker
+     */
+    public function buildRules(RulesChecker $rules)
+    {
+        $rules->add($rules->existsIn(['marque_id'], 'Marques'));
+
+        return $rules;
     }
 }
